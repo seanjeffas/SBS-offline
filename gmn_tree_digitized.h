@@ -59,6 +59,7 @@ public :
    Double_t        ev_ph;
    Double_t        ev_Aperp;
    Double_t        ev_Apar;
+   Double_t        ev_Aen;
    Double_t        ev_Pt;
    Double_t        ev_Pl;
    Double_t        ev_vx;
