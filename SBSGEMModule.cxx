@@ -3262,8 +3262,9 @@ void SBSGEMModule::find_clusters_1D( SBSGEM::GEMaxis_t axis, Double_t constraint
   // }
   
   for( int ihit=0; ihit<fNstrips_hit; ihit++ ){
-    if( fAxis[ihit] == axis && fKeepStrip[ihit] ){
-      
+    //if( fAxis[ihit] == axis && fKeepStrip[ihit] ){
+    if( fAxis[ihit] == axis ){ //Try only enforcing fKeepStrip on the cluster maximum:
+    
       bool newstrip = (striplist.insert( fStrip[ihit] ) ).second;
 
       if( newstrip ){ //should always be true:
@@ -3376,7 +3377,7 @@ void SBSGEMModule::find_clusters_1D( SBSGEM::GEMaxis_t axis, Double_t constraint
       // 	}
       // }
 
-      if( goodtime ){
+      if( goodtime && fKeepStrip[hitindex[strip]] ){
 	islocalmax[strip] = true;
 	localmaxima.insert( strip );
       }
@@ -5254,9 +5255,9 @@ double SBSGEMModule::GetCommonMode( UInt_t isamp, Int_t flag, const mpdmap_t &ap
     
     if(stepsize == 0) cout<<"SBSGEMModule::GetCommonMode() ERROR Histogramming has zeros"<<endl;
     //Construct std::vectors and explicitly zero-initialize them:
-    std::vector<int> bincounts(nbins,0);
-    std::vector<double> binADCsum(nbins,0.0);
-    std::vector<double> binADCsum2(nbins,0.0);
+    std::vector<int> bincounts(nbins+1,0);
+    std::vector<double> binADCsum(nbins+1,0.0);
+    std::vector<double> binADCsum2(nbins+1,0.0);
     
     int ibinmax=-1;
     int maxcounts=0;
@@ -5282,7 +5283,7 @@ double SBSGEMModule::GetCommonMode( UInt_t isamp, Int_t flag, const mpdmap_t &ap
 	binlow--;
       }
 
-      while( binhigh < nbins && fabs( ADC - (scan_min + binhigh*stepsize) ) <= binwidth ){
+      while( binhigh <= nbins && fabs( ADC - (scan_min + binhigh*stepsize) ) <= binwidth ){
 	bincounts[binhigh]++;
 	binADCsum[binhigh] += ADC;
 	binADCsum2[binhigh] += pow(ADC,2);
