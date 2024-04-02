@@ -151,6 +151,7 @@ Int_t SBSSimDecoder::DefineVariables( THaAnalysisObject::EMode mode )
     // ** ^^ **
     {"mc_sigma",   "MC cross section",   "fSigma"},
     {"mc_omega",   "MC phase spece generation",   "fOmega"},
+    {"mc_Q2",      "MC Q2",   "fQ2"},
     {"mc_epx",     "MC electron momentum x",   "fEPx"},
     {"mc_epy",     "MC electron momentum y",   "fEPy"},
     {"mc_epz",     "MC electron momentum z",   "fEPz"},
@@ -162,6 +163,10 @@ Int_t SBSSimDecoder::DefineVariables( THaAnalysisObject::EMode mode )
     {"mc_vz",      "MC vertex z",   "fVz"},
     {"mc_ep",      "MC Initial momentum of the final state electron in GeV",   "fEp"},
     {"mc_np",      "MC Initial momentum of the final state nucleon in GeV",   "fNp"},
+    {"mc_Aperp",   "MC Perpendicular asymmetry",   "fAperp"},
+    {"mc_Apar",    "MC Parallel asymmetry",   "fApar"},
+    {"mc_Pt",      "MC transverse polarization",   "fPt"},
+    {"mc_Pl",      "MC parallel polarization",   "fPl"},
     {"mc_nucl",    "MC Initial (struck) nucleon type: 1 = proton, 0 = neutron",   "fNucl"},
     {"mc_fnucl",   "MC Final-state (detected) nucleon type: 1 = proton, 0 = neutron",   "fFnucl"},
     {"nbbtracks",   "number of BB MC tracks",   "fNBBtracks"},
@@ -335,6 +340,7 @@ Int_t SBSSimDecoder::DoLoadEvent(const Int_t* evbuffer )
   //g4sbs variables
   fSigma = simEvent->Tgmn->ev_sigma;
   fOmega = simEvent->Tgmn->ev_solang;
+  fQ2 = simEvent->Tgmn->ev_Q2;
   fEPx = simEvent->Tgmn->ev_epx;
   fEPy = simEvent->Tgmn->ev_epy;
   fEPz = simEvent->Tgmn->ev_epz;
@@ -346,6 +352,10 @@ Int_t SBSSimDecoder::DoLoadEvent(const Int_t* evbuffer )
   fVz = simEvent->Tgmn->ev_vz;
   fEp = simEvent->Tgmn->ev_ep;
   fNp = simEvent->Tgmn->ev_np;
+  fAperp = simEvent->Tgmn->ev_Aperp;
+  fApar = simEvent->Tgmn->ev_Apar;
+  fPt = simEvent->Tgmn->ev_Pt;
+  fPl = simEvent->Tgmn->ev_Pl;
   fNucl = simEvent->Tgmn->ev_nucl;
   fFnucl = simEvent->Tgmn->ev_fnucl;
   fNBBtracks = simEvent->Tgmn->Earm_BBGEM_Track_ntracks;

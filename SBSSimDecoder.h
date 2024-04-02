@@ -178,6 +178,7 @@ protected:
   // g4sbs variables
   Double_t fSigma;
   Double_t fOmega;
+  Double_t fQ2;
   Double_t fEPx;
   Double_t fEPy;
   Double_t fEPz;
@@ -189,6 +190,10 @@ protected:
   Double_t fVz;
   Double_t fEp;
   Double_t fNp;
+  Double_t fAperp;
+  Double_t fApar;
+  Double_t fPt;
+  Double_t fPl;
   Int_t fNucl;
   Int_t fFnucl;
   Int_t fNBBtracks;
